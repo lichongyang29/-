@@ -1,0 +1,21 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "ellipsize",
+    "Entypo",
+    "Firend",
+    "friendid",
+    "Ionicons",
+    "lnglat",
+    "Pressable",
+    "receiveid",
+    "reduxjs",
+    "rneui",
+    "supabase",
+    "userid",
+    "usersid"
+  ]
+}

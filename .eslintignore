@@ -1,0 +1,5 @@
+/.expo
+node_modules/
+.eslintrc.js
+.husky/
+.vscode/

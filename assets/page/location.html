@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>location.html</title>
+</head>
+<body style="height: 0;">
+    <script>
+    console.log('Page Loaded');
+    function sendData(data) {
+        
+        window.ReactNativeWebView.postMessage(data);
+    }
+
+    function onMessage(data){
+        let event = JSON.parse(data);
+          switch (event.event) {
+            case "getPosition":
+                getGPS()
+                break;
+          }
+    }
+
+    function getGPS() {
+        var startPos;
+        var geoOptions = {
+            enableHighAccuracy: false,
+            timeout: 10000,
+            maximumAge: 5
+        }
+
+        var geoSuccess = function (position) {
+            startPos = position;
+            sendData(JSON.stringify({ event: "getAddressSuccess", message:{position:{latitude:startPos.coords.latitude,longitude:startPos.coords.longitude}}}));
+        };
+
+        var errMessage = {
+            0: 'unknown error',
+            1: 'permission denied',
+            2: 'position unavailable (error response from location provider)',
+            3: 'timed out'
+        }
+        var geoError = function (error) {
+            sendData(JSON.stringify({ event: "getAddressError", message: error.message}));
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+    }
+    </script>
+</body>
+</html>
